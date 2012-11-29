@@ -1,3 +1,7 @@
+import os
+import django
+#i use the stuff above for finding the templates because full paths suck 
+
 # Django settings for i_miss_charlie project.
 
 DEBUG = True
