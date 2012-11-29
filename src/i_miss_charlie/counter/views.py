@@ -3,7 +3,7 @@ from django.shortcuts import render_to_response
 import datetime
 
 def index(request):
-	today = datetime.date.today()
+	today = datetime.datetime.today()
 	v = Visit.objects.get(id=1).visit_date
 	delta = today-v
 	days = delta.days
