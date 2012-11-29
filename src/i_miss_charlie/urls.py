@@ -9,8 +9,8 @@ urlpatterns = patterns('',
     # url(r'^$', 'i_miss_charlie.views.home', name='home'),
     # url(r'^i_miss_charlie/', include('i_miss_charlie.foo.urls')),
 
-    url(r'^counter/$', 'counter.views.index')    
-    url(r'^charlieishere/$', 'counter'views.charlieishere')
+    url(r'^counter/$', 'counter.views.index'), 
+    url(r'^charlieishere/$', 'counter'views.charlieishere'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
