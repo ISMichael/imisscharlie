@@ -1,6 +1,6 @@
 from counter.models import Visit
 from django.shortcuts import render_to_response
-from datetime import datetime
+import datetime
 
 def index(request):
 	today = datetime.date.today()
