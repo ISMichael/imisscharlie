@@ -1,0 +1,13 @@
+>>> from counter.models import Visit
+>>> v = Visit.objects.get(id=1)
+>>> import datetime
+>>> d = datetime.datetime(2012,11,7,00,00)
+>>> 
+>>> v.visit_date = d
+>>>  v.save()
+  File "<console>", line 1
+    v.save()
+   ^
+IndentationError: unexpected indent
+>>> v.save()
+>>> exit()
