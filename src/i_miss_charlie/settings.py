@@ -105,6 +105,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
+PREPEND_WWW = 'True'
 ROOT_URLCONF = 'i_miss_charlie.urls'
 
 TEMPLATE_DIRS = (
