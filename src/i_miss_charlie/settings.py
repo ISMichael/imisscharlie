@@ -106,7 +106,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(SITE_ROOT, 'templates')
+    '/templates'
 )
 )
 
@@ -117,7 +117,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'counter'
+    'counter',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -148,7 +148,40 @@ LOGGING = {
 }
 
 # Parse database configuration from $DATABASE_URL
-import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
+#import dj_database_url
+#DATABASES['default'] =  dj_database_url.config()
 #DATABASES = {'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))}
 
+import os
+import sys
+import urlparse
+
+# Register database schemes in URLs.
+urlparse.uses_netloc.append('postgres')
+urlparse.uses_netloc.append('mysql')
+
+try:
+    if 'DATABASES' not in locals():
+        DATABASES = {}
+
+    if 'DATABASE_URL' in os.environ:
+        url = urlparse.urlparse(os.environ['DATABASE_URL'])
+
+        # Ensure default database exists.
+        DATABASES['default'] = DATABASES.get('default', {})
+
+        # Update with environment configuration.
+        DATABASES['default'].update({
+            'NAME': url.path[1:],
+            'USER': url.username,
+            'PASSWORD': url.password,
+            'HOST': url.hostname,
+            'PORT': url.port,
+        })
+        if url.scheme == 'postgres':
+            DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
+
+        if url.scheme == 'mysql':
+            DATABASES['default']['ENGINE'] = 'django.db.backends.mysql'
+except Exception:
+    print 'Unexpected error:', sys.exc_info()
