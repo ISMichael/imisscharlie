@@ -1,5 +1,6 @@
 import os
-import django
+#import django
+SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 #i use the stuff above for finding the templates because full paths suck 
 
 # Django settings for i_miss_charlie project.
