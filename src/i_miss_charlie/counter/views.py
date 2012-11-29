@@ -12,4 +12,5 @@ def index(request):
 def charlieishere(request):
 	v = Visit.objects.get(id=1)
 	v.visit_date = datetime.datetime.today()
+	v.save()
 	return index(request)
