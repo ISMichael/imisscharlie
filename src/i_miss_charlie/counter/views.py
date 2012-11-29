@@ -9,4 +9,7 @@ def index(request):
 	days = delta.days
 	return render_to_response('counter/index.html',{'days':days})
 
-
+def charlieishere(request):
+	v = Visit.objects.get(id=1)
+	v.visit_date = datetime.datetime.today()
+	return index(request)
